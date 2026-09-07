@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The Sankara Hill Penida component reference.">
+  <title>The Sankara Hill Penida | Components</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/home.css">
+</head>
+<body>
+  <svg class="u-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+    </defs>
+  </svg>
+  <a class="u-skip-link" href="#guide-content">Skip to content</a>
+  <main class="c-guide" id="guide-content">
+    <header class="c-guide__header">
+      <span class="c-section-head__kicker">The Sankara Hill Penida</span>
+      <h1 class="c-section-head__title">Component reference</h1>
+      <p class="c-guide__note">Shared markup uses production classes from the static homepage. No component-specific duplicate styles.</p>
+    </header>
+
+    <section class="c-guide__section" aria-labelledby="colors-title">
+      <h2 id="colors-title">Color palette</h2>
+      <div class="c-guide__grid">
+        <div class="c-guide__swatch c-guide__swatch--bg"><span class="c-guide__label">Background · --color-bg</span></div>
+        <div class="c-guide__swatch c-guide__swatch--surface"><span class="c-guide__label">Surface · --color-surface</span></div>
+        <div class="c-guide__swatch c-guide__swatch--ink"><span class="c-guide__label">Ink · --color-ink</span></div>
+        <div class="c-guide__swatch c-guide__swatch--accent"><span class="c-guide__label">Accent · --color-accent</span></div>
+        <div class="c-guide__swatch c-guide__swatch--gold"><span class="c-guide__label">Gold · --color-gold</span></div>
+        <div class="c-guide__swatch c-guide__swatch--line"><span class="c-guide__label">Line · --color-line</span></div>
+      </div>
+    </section>
+
+    <section class="c-guide__section c-guide__stack" aria-labelledby="type-title">
+      <h2 id="type-title">Typography</h2>
+      <div class="c-guide__sample"><h1>Display heading</h1><h2>Section heading</h2><h3>Card heading</h3><p>Body copy uses Switzer. Display copy uses Lora.</p><em>Italic editorial accent</em></div>
+    </section>
+
+    <section class="c-guide__section c-guide__stack" aria-labelledby="buttons-title">
+      <h2 id="buttons-title">Buttons</h2>
+      <div class="c-guide__sample"><a class="c-button c-button--primary" href="#buttons-title">Primary action</a><a class="c-button c-button--outline" href="#buttons-title">Outline action</a><a class="c-button c-button--gold" href="#buttons-title">Gold action</a><a class="c-button c-button--light" href="#buttons-title">Light action</a></div>
+    </section>
+
+    <section class="c-guide__section c-guide__stack" aria-labelledby="forms-title">
+      <h2 id="forms-title">Form elements</h2>
+      <div class="c-guide__sample"><label class="c-booking__field"><span class="c-booking__label">Check in</span><input class="c-booking__input" type="date" aria-label="Example check-in date"></label><button class="c-booking__trigger" type="button" aria-expanded="false">2 Adults <span><svg aria-hidden="true"><use href="#i-chevron-down"></use></svg></span></button></div>
+    </section>
+
+    <section class="c-guide__section c-guide__stack" aria-labelledby="cards-title">
+      <h2 id="cards-title">Cards</h2>
+      <div class="c-guide__sample"><article class="c-amenity"><div class="c-amenity__media"><img src="images/Pool.jpeg" alt="Cliffside infinity pool"><span class="c-amenity__scrim"></span></div><div class="c-amenity__body"><span class="c-amenity__label">01 · Wellness</span><h3 class="c-amenity__name">Cliffside Infinity Pool</h3><p class="c-amenity__text">Production amenity card.</p></div></article><article class="c-review"><p class="c-review__text">“Every detail felt considered.”</p><div class="c-review__meta"><strong>Guest note</strong><span>· Google Reviews</span></div></article></div>
+    </section>
+
+    <section class="c-guide__section c-guide__stack" aria-labelledby="interactive-title">
+      <h2 id="interactive-title">Interactive components</h2>
+      <div class="c-guide__sample"><button class="c-chip is-active" type="button">Active filter</button><button class="c-chip" type="button">Filter</button><button class="c-accordion__trigger" type="button" aria-expanded="false"><span class="c-accordion__question">Accordion trigger</span><span class="c-accordion__indicator"><svg aria-hidden="true"><use href="#i-plus"></use></svg></span></button></div>
+    </section>
+
+    <section class="c-guide__section" aria-labelledby="footer-title">
+      <h2 id="footer-title">Footer</h2>
+      <footer class="c-footer"><div class="c-footer__brand"><span class="c-footer__name">THE SANKARA HILL</span><span class="c-footer__tagline">A Serene Sanctuary Above the Cobalt Sea</span></div></footer>
+    </section>
+
+    <section class="c-guide__section" aria-labelledby="qa-title">
+      <h2 id="qa-title">Manual QA checklist</h2>
+      <p class="c-guide__note">Pending manual browser verification.</p>
+      <ul class="c-guide__qa"><li>Desktop and mobile layout matches current geometry.</li><li>Mobile menu opens, closes, and supports keyboard focus.</li><li>Booking rejects missing or reversed dates.</li><li>Guest menu selection updates visible value.</li><li>Room tabs and detail toggle update content.</li><li>Amenities arrows scroll track.</li><li>FAQ filters and accordion preserve accessible state.</li><li>Images load from local output/images paths.</li><li>Focus-visible styles remain visible on every control.</li></ul>
+    </section>
+  </main>
+</body>
+</html>
