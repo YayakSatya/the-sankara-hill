@@ -5,6 +5,7 @@
 }
 
 html {
+  font-size: 100%;
   scroll-behavior: smooth;
 }
 
@@ -70,8 +71,23 @@ input {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-gold);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  /* Drop movement, keep fades. Individual components opt in to a gentler
+     opacity-only variant under their own reduced-motion rules. */
+  .c-hero__media img,
+  .c-hero__content,
+  .c-booking {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 /* assumption: skip link not shown in design; standard accessibility convention */
