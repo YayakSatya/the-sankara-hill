@@ -31,6 +31,28 @@
     if (guestMenu && !guestMenu.parentElement?.contains(event.target)) setGuestMenu(false);
   });
 
+  // Phase 2: every booking action is a redirect to the STAAH URL configured on
+  // <body data-booking-url>. Empty value hides the CTAs (PRD edge case: STAAH URL kosong).
+  // Phase 1 pages have no attribute and keep their Booking.com fallback.
+  const bookingUrl = document.body.dataset.bookingUrl;
+  if (bookingUrl === '') $$('[data-booking-cta], .booking').forEach((cta) => { cta.hidden = true; });
+
+  // WhatsApp number lives on <body data-whatsapp>; empty value hides the float
+  // (PRD 7.4 global options). Pages without the attribute keep the float.
+  if (document.body.dataset.whatsapp === '') $$('.whatsapp-float').forEach((float) => { float.hidden = true; });
+
+  // Active nav link from <body data-page="about">: matches the link's file
+  // name (about.html, id/about.html) so header, mobile menu and footer agree.
+  const page = document.body.dataset.page;
+  if (page) {
+    $$('.header__link, .mobile-menu__link').forEach((link) => {
+      const file = (link.getAttribute('href') || '').split(/[?#]/)[0].split('/').pop().replace(/\.html$/, '');
+      const active = file === page || (page === 'home' && (file === '' || file === 'index'));
+      if (active) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  }
+
   const bookingForm = $('[data-booking-form]');
   const bookingNote = $('[data-booking-note]');
   const checkInEl = $('#home_page_check_in_input');
@@ -60,9 +82,11 @@
       bookingNote.classList.remove('is-error');
       bookingNote.textContent = 'Dates noted. Opening secure availability search…';
     }
-    const url = new URL('https://www.booking.com/hotel/id/the-sankara-hill-penida.html');
+    // TODO(config): confirm STAAH query parameter names for dates/guests with the client's booking engine.
+    const url = new URL(bookingUrl || 'https://www.booking.com/hotel/id/the-sankara-hill-penida.html');
     url.searchParams.set('checkin', checkIn);
     url.searchParams.set('checkout', checkOut);
+    if (bookingUrl && guestValue) url.searchParams.set('guests', guestValue.textContent.trim());
     window.open(url.toString(), '_blank', 'noopener,noreferrer');
   });
 
@@ -80,7 +104,7 @@
     const room = rooms[selectedRoom];
     if (!roomDisplay) return;
     roomDisplay.setAttribute('aria-labelledby', `home_page_room_tab_${roomTabIds[selectedRoom]}`);
-    roomDisplay.innerHTML = `<div class="room__gallery"><div class="room__frame"><img id="home_page_room_image" src="${room.image}" alt="${room.name}" loading="lazy" decoding="async" width="1600" height="1142"><div class="room__tags">${room.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div></div></div><div class="room__panel"><div><h3 class="room__name">${room.name}</h3><p class="room__desc">${room.description}</p><div class="room__specs"><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-ruler"></use></svg></span><span><span class="spec__label">Size</span><span class="spec__value">${room.size}</span></span></div><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-eye"></use></svg></span><span><span class="spec__label">Views</span><span class="spec__value">${room.views}</span></span></div><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-users"></use></svg></span><span><span class="spec__label">Capacity</span><span class="spec__value">${room.capacity}</span></span></div><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-bed-double"></use></svg></span><span><span class="spec__label">Bedding</span><span class="spec__value">${room.beds}</span></span></div></div><span class="room__details-label">Exclusive Details</span><ul class="room__details">${room.details.map((detail, index) => `<li class="room__detail${index > 2 ? ' is-extra' : ''}"${index > 2 && !showAllDetails ? ' hidden' : ''}>${detail}</li>`).join('')}</ul>${room.details.length > 3 ? `<button class="room__more" id="home_page_room_details_button" type="button" data-room-more>${showAllDetails ? 'Show Less' : `View All (${room.details.length - 3} More Details)`}</button>` : ''}</div><div class="room__actions"><a class="button button--primary" id="home_page_room_booking_button" href="https://www.booking.com/hotel/id/the-sankara-hill-penida.html?selected_room=${encodeURIComponent(room.name)}" target="_blank" rel="noopener noreferrer">Book Securely <svg aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></a></div></div>`;
+    roomDisplay.innerHTML = `<div class="room__gallery"><div class="room__frame"><img id="home_page_room_image" src="${room.image}" alt="${room.name}" loading="lazy" decoding="async" width="1600" height="1142"><div class="room__tags">${room.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div></div></div><div class="room__panel"><div><h3 class="room__name">${room.name}</h3><p class="room__desc">${room.description}</p><div class="room__specs"><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-ruler"></use></svg></span><span><span class="spec__label">Size</span><span class="spec__value">${room.size}</span></span></div><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-eye"></use></svg></span><span><span class="spec__label">Views</span><span class="spec__value">${room.views}</span></span></div><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-users"></use></svg></span><span><span class="spec__label">Capacity</span><span class="spec__value">${room.capacity}</span></span></div><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-bed-double"></use></svg></span><span><span class="spec__label">Bedding</span><span class="spec__value">${room.beds}</span></span></div></div><span class="room__details-label">Exclusive Details</span><ul class="room__details">${room.details.map((detail, index) => `<li class="room__detail${index > 2 ? ' is-extra' : ''}"${index > 2 && !showAllDetails ? ' hidden' : ''}>${detail}</li>`).join('')}</ul>${room.details.length > 3 ? `<button class="room__more" id="home_page_room_details_button" type="button" data-room-more>${showAllDetails ? 'Show Less' : `View All (${room.details.length - 3} More Details)`}</button>` : ''}</div><div class="room__actions">${bookingUrl === '' ? '' : `<a class="button button--primary" id="home_page_room_booking_button" href="${bookingUrl || `https://www.booking.com/hotel/id/the-sankara-hill-penida.html?selected_room=${encodeURIComponent(room.name)}`}" target="_blank" rel="noopener noreferrer" data-booking-cta>${bookingUrl ? 'Book Now' : 'Book Securely'} <svg aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></a>`}</div></div>`;
     $('[data-room-more]', roomDisplay)?.addEventListener('click', () => { showAllDetails = !showAllDetails; renderRoom(); });
   };
   $$('[data-room-tab]').forEach((tab) => tab.addEventListener('click', () => {
@@ -106,26 +130,80 @@
     revealTargets.forEach((target) => target.classList.add('is-inview'));
   }
 
-  const amenitiesTrack = $('[data-amenities-track]');
-  const amenitiesLeft = $('[data-scroll-left]');
-  const amenitiesRight = $('[data-scroll-right]');
-  if (amenitiesTrack) {
+  // Horizontal scroll-snap slider: arrows step one card, disable at the ends.
+  // Shared by the home amenities track and every [data-slider] on inner pages.
+  const initSlider = (track, prev, next, cardSelector) => {
+    if (!track) return;
     const step = () => {
-      const card = $('.amenity', amenitiesTrack);
-      const gap = parseFloat(getComputedStyle(amenitiesTrack).columnGap) || 0;
+      const card = cardSelector ? $(cardSelector, track) : track.firstElementChild;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
       return card ? card.offsetWidth + gap : 360;
     };
     const updateArrows = () => {
-      const maxLeft = amenitiesTrack.scrollWidth - amenitiesTrack.clientWidth;
-      if (amenitiesLeft) amenitiesLeft.disabled = amenitiesTrack.scrollLeft <= 1;
-      if (amenitiesRight) amenitiesRight.disabled = amenitiesTrack.scrollLeft >= maxLeft - 1;
+      const maxLeft = track.scrollWidth - track.clientWidth;
+      if (prev) prev.disabled = track.scrollLeft <= 1;
+      if (next) next.disabled = track.scrollLeft >= maxLeft - 1;
     };
-    amenitiesLeft?.addEventListener('click', () => amenitiesTrack.scrollBy({ left: -step(), behavior: 'smooth' }));
-    amenitiesRight?.addEventListener('click', () => amenitiesTrack.scrollBy({ left: step(), behavior: 'smooth' }));
-    amenitiesTrack.addEventListener('scroll', updateArrows, { passive: true });
+    prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    track.addEventListener('scroll', updateArrows, { passive: true });
     window.addEventListener('resize', updateArrows, { passive: true });
     updateArrows();
-  }
+  };
+  initSlider($('[data-amenities-track]'), $('[data-scroll-left]'), $('[data-scroll-right]'), '.amenity');
+  $$('[data-slider]').forEach((slider) => initSlider($('[data-slider-track]', slider), $('[data-slider-prev]', slider), $('[data-slider-next]', slider)));
+
+  // Generic chip filter: [data-filter-group] holds [data-filter="<cat>"] chips
+  // and controls the list named by aria-controls / data-filter-target. Items
+  // carry data-category (space-separated); "all" shows everything. Items stay
+  // in the DOM (SEO, Polylang) and are toggled with `hidden`. The FAQ block on
+  // home keeps its own render path (data-faq-filter) and is not affected.
+  $$('[data-filter-group]').forEach((group) => {
+    const targetId = group.dataset.filterTarget || group.getAttribute('aria-controls');
+    const list = targetId ? document.getElementById(targetId) : null;
+    if (!list) return;
+    const items = $$('[data-filter-item]', list);
+    const empty = list.parentElement ? $('.empty-state[data-filter-empty]', list.parentElement) : null;
+    const apply = (value) => {
+      let shown = 0;
+      items.forEach((item) => {
+        const categories = (item.dataset.category || '').split(/\s+/);
+        const visible = value === 'all' || categories.includes(value);
+        item.hidden = !visible;
+        if (visible) shown += 1;
+      });
+      if (empty) empty.hidden = shown > 0;
+    };
+    $$('[data-filter]', group).forEach((chip) => chip.addEventListener('click', () => {
+      $$('[data-filter]', group).forEach((item) => { const active = item === chip; item.classList.toggle('is-active', active); item.setAttribute('aria-pressed', String(active)); });
+      apply(chip.dataset.filter || 'all');
+    }));
+    const initial = $('[data-filter].is-active', group);
+    if (initial && initial.dataset.filter !== 'all') apply(initial.dataset.filter);
+  });
+
+  // "View all" toggle for static amenity lists ([data-details-toggle] with
+  // aria-controls -> list whose .is-extra items start hidden). The home room
+  // panel keeps its own [data-room-more] because it re-renders.
+  $$('[data-details-toggle]').forEach((button) => {
+    const list = document.getElementById(button.getAttribute('aria-controls') || '');
+    if (!list) return;
+    const extras = $$('.is-extra', list);
+    button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') === 'true';
+      extras.forEach((item) => { item.hidden = open; });
+      button.setAttribute('aria-expanded', String(!open));
+      button.textContent = open ? (button.dataset.labelMore || 'View All') : (button.dataset.labelLess || 'Show Less');
+    });
+  });
+
+  // .form: validation styling only after the first submit attempt (see
+  // components.css `.form.is-submitted`). Page scripts (contact.js) own the
+  // fetch/submit itself.
+  $$('form.form').forEach((form) => {
+    form.addEventListener('submit', () => form.classList.add('is-submitted'));
+    form.addEventListener('invalid', () => form.classList.add('is-submitted'), true);
+  });
 
   const faqs = [
     ['Nusa Penida', "How do we get to The Sankara Hill Penida from Bali's mainland?", 'Nusa Penida is easily accessible via a 30-to-40 minute fast boat ride from Sanur Harbor in East Denpasar to either Toyapakeh or Sampalan Harbor in Nusa Penida. We provide a seamless transfer service, including private car pickups from Bali’s airport or your hotel, fast boat ticketing, and harbor luggage handling directly to our resort check-in desk.'],

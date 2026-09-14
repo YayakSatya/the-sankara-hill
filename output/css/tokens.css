@@ -28,6 +28,8 @@
   --color-gold-dark: #b38f48;
   --color-line: #e7e3d4;
   --color-error: #e11d48;
+  --color-success: #2f7a4f;
+  --color-whatsapp: #25d366;
 
   /* ---- Spacing ---- */
   --space-1: clamp(0.1875rem, 0.2083vw, 0.3333rem);   /* 3px */
