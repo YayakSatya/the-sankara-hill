@@ -39,7 +39,7 @@ img {
   display: block;
 }
 
-.u-sprite {
+.sprite {
   position: absolute;
   width: 0;
   height: 0;
@@ -82,16 +82,16 @@ input {
 
   /* Drop movement, keep fades. Individual components opt in to a gentler
      opacity-only variant under their own reduced-motion rules. */
-  .c-hero__media img,
-  .c-hero__content,
-  .c-booking {
+  .hero__media img,
+  .hero__content,
+  .booking {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
 }
 
 /* assumption: skip link not shown in design; standard accessibility convention */
-.u-skip-link {
+.skip-link {
   position: absolute;
   left: -999px;
   top: 0;
@@ -101,7 +101,7 @@ input {
   color: var(--color-ink);
 }
 
-.u-skip-link:focus {
+.skip-link:focus {
   left: var(--space-2);
   top: var(--space-2);
 }

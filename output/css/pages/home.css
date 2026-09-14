@@ -1,4 +1,4 @@
-.c-welcome__map-column {
+.welcome__map-column {
   min-width: 0;
 }
 
@@ -14,28 +14,28 @@
    pin sits on its real location on Nusa Penida. */
 /* Marker coordinates are percentages of the map's "150 140 810 520" viewBox,
    so each pin sits on its real location on Nusa Penida. */
-.c-poi--resort-pos { left: 49.1%; top: 16.5%; }    /* Ped / Sental, north coast */
-.c-poi--harbor-pos { left: 64%; top: 10.6%; }      /* Sampalan / Buyuk harbour */
-.c-poi--billabong-pos { left: 10.1%; top: 41.9%; } /* west coast */
-.c-poi--kelingking-pos { left: 27.2%; top: 69.2%; }/* south-west clifftop */
-.c-poi--diamond-pos { left: 87.4%; top: 82.7%; }   /* Atuh, south-east */
-.c-poi--airport-pos { left: 3.5%; top: 55.8%; }    /* off-island: Bali, due west */
+.poi--resort-pos { left: 49.1%; top: 16.5%; }    /* Ped / Sental, north coast */
+.poi--harbor-pos { left: 64%; top: 10.6%; }      /* Sampalan / Buyuk harbour */
+.poi--billabong-pos { left: 10.1%; top: 41.9%; } /* west coast */
+.poi--kelingking-pos { left: 27.2%; top: 69.2%; }/* south-west clifftop */
+.poi--diamond-pos { left: 87.4%; top: 82.7%; }   /* Atuh, south-east */
+.poi--airport-pos { left: 3.5%; top: 55.8%; }    /* off-island: Bali, due west */
 
-.c-highlights__head {
+.highlights__head {
   text-align: center;
 }
 
-.c-chapter__body--center {
+.chapter__body--center {
   text-align: center;
 }
 
 @media (min-width: 1024px) {
-  .c-chapter__body--center {
+  .chapter__body--center {
     text-align: left;
   }
 }
 
-.c-amenities__head {
+.amenities__head {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
@@ -45,83 +45,83 @@
 }
 
 @media (min-width: 768px) {
-  .c-amenities__head {
+  .amenities__head {
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
   }
 }
 
-.c-amenities__head .c-section-head {
+.amenities__head .section-head {
   margin-bottom: 0;
 }
 
-.c-amenities__cta {
+.amenities__cta {
   width: 100%;
 }
 
 @media (min-width: 768px) {
-  .c-amenities__cta {
+  .amenities__cta {
     width: auto;
   }
 }
 
-.c-amenities__cta .c-button {
+.amenities__cta .button {
   width: 100%;
 }
 
 @media (min-width: 768px) {
-  .c-amenities__cta .c-button {
+  .amenities__cta .button {
     width: auto;
   }
 }
 
-.c-amenities__cta-wrap {
+.amenities__cta-wrap {
   width: auto;
   margin: var(--space-16) var(--amenities-inset) 0;
 }
 
-.c-faq__layout {
+.faq__layout {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-20);
 }
 
 @media (min-width: 1024px) {
-  .c-faq__layout {
+  .faq__layout {
     grid-template-columns: repeat(12, 1fr);
   }
 
-  .c-faq__column {
+  .faq__column {
     grid-column: span 7;
   }
 
-  .c-faq__reviews {
+  .faq__reviews {
     grid-column: span 5;
   }
 }
 
-.c-faq__title {
+.faq__title {
   margin-bottom: var(--space-8);
   padding-inline: 0;
   font-size: var(--text-h2);
   text-align: left;
 }
 
-.c-footer__container {
+.footer__container {
   width: 100%;
   max-width: var(--content-width);
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
 
-.c-footer__socials {
+.footer__socials {
   display: flex;
   gap: var(--space-4);
   margin-top: var(--space-6);
 }
 
-.c-footer__social {
+.footer__social {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,26 +132,26 @@
   color: rgb(255 255 255 / 70%);
 }
 
-.c-footer__social:hover {
+.footer__social:hover {
   border-color: var(--color-gold);
   color: var(--color-gold);
 }
 
-.c-footer__social svg {
+.footer__social svg {
   width: var(--icon-md);
   height: var(--icon-md);
 }
 
-.c-footer__language {
+.footer__language {
   display: flex;
   gap: var(--space-4);
 }
 
-.c-footer__language a {
+.footer__language a {
   display: inline-block;
   padding-block: var(--space-2);
 }
 
-.c-footer__language a:hover {
+.footer__language a:hover {
   color: var(--color-gold);
 }

@@ -11,7 +11,7 @@
     mobileMenu.classList.toggle('is-open', open);
   };
   menuToggle?.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
-  $$('.c-mobile-menu__link, .c-mobile-menu .c-button').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+  $$('.mobile-menu__link, .mobile-menu .button').forEach((link) => link.addEventListener('click', () => setMenu(false)));
   window.addEventListener('scroll', () => header?.classList.toggle('is-scrolled', window.scrollY > 24), { passive: true });
 
   const guestToggle = $('[data-guest-toggle]');
@@ -33,8 +33,8 @@
 
   const bookingForm = $('[data-booking-form]');
   const bookingNote = $('[data-booking-note]');
-  const checkInEl = $('#check-in');
-  const checkOutEl = $('#check-out');
+  const checkInEl = $('#home_page_check_in_input');
+  const checkOutEl = $('#home_page_check_out_input');
   const today = new Date().toISOString().slice(0, 10);
   if (checkInEl) checkInEl.min = today;
   if (checkOutEl) checkOutEl.min = today;
@@ -45,8 +45,8 @@
   });
   bookingForm?.addEventListener('submit', (event) => {
     event.preventDefault();
-    const checkIn = $('#check-in')?.value;
-    const checkOut = $('#check-out')?.value;
+    const checkIn = $('#home_page_check_in_input')?.value;
+    const checkOut = $('#home_page_check_out_input')?.value;
     if (!checkIn || !checkOut || checkOut <= checkIn) {
       if (bookingNote) {
         bookingNote.hidden = false;
@@ -66,20 +66,21 @@
     window.open(url.toString(), '_blank', 'noopener,noreferrer');
   });
 
-  // assumption: image files reused from existing asset set (no dedicated photo per room type); capacity not stated in source, defaulted to 2 Adults
+  // assumption: image files reused from existing asset set (no dedicated photo per room type; "Photo Link: [link]" still pending in the content doc); capacity not stated in source, defaulted to 2 Adults. Unit counts for villas (4 + 21 = 25) come from the presentation deck, not the content doc.
   const rooms = [
-    { name: 'Ocean Hill Suite', description: 'Spanning 41 sqm, thoughtfully designed to embrace the surrounding seascape, this room features elegant interiors, a comfortable king-size bed, and a private balcony overlooking the ocean. Perfect for couples or travelers seeking a peaceful island retreat.', size: '41 sqm · 16 Rooms', views: 'Ocean View', capacity: '2 Adults', beds: 'King-size Bed', image: 'images/one-bedroom-ocean-view.jpg', tags: ['16 Rooms', 'Ocean View'], details: ['Double / Twin-size Bed', 'Premium Mattress & Linen', 'Balcony with View', 'Writing Desk', 'Smart TV', 'Air Conditioning', 'Wardrobe', 'Safety Deposit Box', 'Mini Refrigerator', 'Coffee Table', 'Full-Length Mirror', 'High-Speed Wi-Fi', 'Telephone', 'USB Charging Port', 'Luggage Rack', 'Bedside Reading Lamp', 'Bluetooth Speakers'] },
-    { name: 'Garden Hill Pool Villa', description: "Set within Nusa Penida's tranquil hillside landscape, this private villa spans approximately 47 sqm, featuring a spacious bedroom, living area, and private pool overlooking rolling hills — offering a peaceful sanctuary for guests seeking relaxation.", size: '47 sqm · 4 Units', views: 'Rolling Hills View', capacity: '2 Adults', beds: 'King-size Bed', image: 'images/villa-room.jpg', tags: ['4 Units', 'Private Pool'], details: ['Private Pool', 'Bedroom', 'Living Area', 'Hillside View'] },
-    { name: 'Ocean Hill Pool Villa', description: 'Perched to capture breathtaking ocean views, this 51 sqm villa offers a refined island sanctuary with a private pool, spacious living area, and contemporary tropical design. Ideal for honeymooners or guests seeking an elevated and tranquil island escape.', size: '51 sqm · 21 Units', views: 'Ocean View', capacity: '2 Adults', beds: 'King-size Bed', image: 'images/two-bedrooom-family-pool.jpg', tags: ['21 Units', 'Private Pool'], details: ['King-size Bed', 'Premium Mattress & Linen', 'Private Terrace Deck', 'Plunge Pool', 'Outdoor Sundeck', 'Writing Desk', 'Smart TV', 'Air Conditioning', 'Wardrobe', 'Safety Deposit Box', 'Mini Refrigerator', 'Coffee Table', 'Full-Length Mirror', 'High-Speed Wi-Fi', 'Telephone', 'USB Charging Port', 'Luggage Rack', 'Bedside Reading Lamp', 'Bluetooth Speakers'] }
+    { name: 'Ocean Hill Suite', description: 'Spanning 41 sqm, thoughtfully designed to embrace the surrounding seascape, this room features elegant interiors, a comfortable queen-size or twin-size bed, and a private balcony overlooking the ocean. Perfect for couples or travelers seeking a peaceful island retreat.', size: '41 sqm · 16 Rooms', views: 'Ocean View', capacity: '2 Adults', beds: 'Queen or Twin Beds', image: 'images/one-bedroom-ocean-view.jpg', tags: ['16 Rooms', 'Ocean View'], details: ['Double / Twin-size Bed', 'Premium Mattress & Linen', 'Balcony with View', 'Writing Desk', 'Smart TV', 'Air Conditioning', 'Wardrobe', 'Safety Deposit Box', 'Mini Refrigerator', 'Coffee Table', 'Full-Length Mirror', 'High-Speed Wi-Fi', 'Telephone', 'USB Charging Port', 'Luggage Rack', 'Bedside Reading Lamp', 'Bluetooth Speakers'] },
+    { name: 'Garden View Pool Villa', description: "Set within Nusa Penida's tranquil hillside landscape, this private villa spans approximately 47 sqm, featuring a spacious bedroom, living area, and private pool overlooking rolling hills — offering a peaceful sanctuary for guests seeking relaxation.", size: '47 sqm · 4 Villas', views: 'Garden & Hill View', capacity: '2 Adults', beds: 'King-size Bed', image: 'images/villa-room.jpg', tags: ['4 Villas', 'Private Pool'], details: ['King-size Bed', 'Premium Mattress & Linen', 'Private Terrace Deck', 'Plunge Pool', 'Outdoor Sundeck', 'Writing Desk', 'Smart TV', 'Air Conditioning', 'Wardrobe', 'Safety Deposit Box', 'Mini Refrigerator', 'Coffee Table', 'Full-Length Mirror', 'High-Speed Wi-Fi', 'Telephone', 'USB Charging Port', 'Luggage Rack', 'Bedside Reading Lamp', 'Bluetooth Speakers'] },
+    { name: 'Ocean View Pool Villa', description: 'Perched to capture breathtaking ocean views, this 51 sqm villa offers a refined island sanctuary with a private pool, spacious living area, and contemporary tropical design. Ideal for honeymooners or guests seeking an elevated and tranquil island escape.', size: '51 sqm · 21 Villas', views: 'Ocean View', capacity: '2 Adults', beds: 'King-size Bed', image: 'images/two-bedrooom-family-pool.jpg', tags: ['21 Villas', 'Private Pool'], details: ['King-size Bed', 'Premium Mattress & Linen', 'Private Terrace Deck', 'Plunge Pool', 'Outdoor Sundeck', 'Writing Desk', 'Smart TV', 'Air Conditioning', 'Wardrobe', 'Safety Deposit Box', 'Mini Refrigerator', 'Coffee Table', 'Full-Length Mirror', 'High-Speed Wi-Fi', 'Telephone', 'USB Charging Port', 'Luggage Rack', 'Bedside Reading Lamp', 'Bluetooth Speakers'] }
   ];
+  const roomTabIds = ['ocean_hill_suite', 'garden_view_pool_villa', 'ocean_view_pool_villa'];
   const roomDisplay = $('[data-room-display]');
   let selectedRoom = 0;
   let showAllDetails = false;
   const renderRoom = () => {
     const room = rooms[selectedRoom];
     if (!roomDisplay) return;
-    roomDisplay.setAttribute('aria-labelledby', `home_page_room_tab_${selectedRoom === 0 ? 'ocean_villa' : selectedRoom === 1 ? 'hill_suite' : 'family_villa'}`);
-    roomDisplay.innerHTML = `<div class="c-room__gallery"><div class="c-room__frame"><img id="home_page_room_image" src="${room.image}" alt="${room.name}" loading="lazy" decoding="async" width="1600" height="1142"><div class="c-room__tags">${room.tags.map((tag) => `<span class="c-tag">${tag}</span>`).join('')}</div></div></div><div class="c-room__panel"><div><h3 class="c-room__name">${room.name}</h3><p class="c-room__desc">${room.description}</p><div class="c-room__specs"><div class="c-spec"><span class="c-spec__icon"><svg aria-hidden="true"><use href="#i-ruler"></use></svg></span><span><span class="c-spec__label">Size</span><span class="c-spec__value">${room.size}</span></span></div><div class="c-spec"><span class="c-spec__icon"><svg aria-hidden="true"><use href="#i-eye"></use></svg></span><span><span class="c-spec__label">Views</span><span class="c-spec__value">${room.views}</span></span></div><div class="c-spec"><span class="c-spec__icon"><svg aria-hidden="true"><use href="#i-users"></use></svg></span><span><span class="c-spec__label">Capacity</span><span class="c-spec__value">${room.capacity}</span></span></div><div class="c-spec"><span class="c-spec__icon"><svg aria-hidden="true"><use href="#i-bed-double"></use></svg></span><span><span class="c-spec__label">Bedding</span><span class="c-spec__value">${room.beds}</span></span></div></div><span class="c-room__details-label">Exclusive Details</span><ul class="c-room__details">${room.details.map((detail, index) => `<li class="c-room__detail${index > 2 ? ' is-extra' : ''}"${index > 2 && !showAllDetails ? ' hidden' : ''}>${detail}</li>`).join('')}</ul>${room.details.length > 3 ? `<button class="c-room__more" id="home_page_room_details_button" type="button" data-room-more>${showAllDetails ? 'Show Less' : `View All (${room.details.length - 3} More Details)`}</button>` : ''}</div><div class="c-room__actions"><a class="c-button c-button--primary" id="home_page_room_booking_button" href="https://www.booking.com/hotel/id/the-sankara-hill-penida.html?selected_room=${encodeURIComponent(room.name)}" target="_blank" rel="noopener noreferrer">Book Securely <svg aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></a></div></div>`;
+    roomDisplay.setAttribute('aria-labelledby', `home_page_room_tab_${roomTabIds[selectedRoom]}`);
+    roomDisplay.innerHTML = `<div class="room__gallery"><div class="room__frame"><img id="home_page_room_image" src="${room.image}" alt="${room.name}" loading="lazy" decoding="async" width="1600" height="1142"><div class="room__tags">${room.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div></div></div><div class="room__panel"><div><h3 class="room__name">${room.name}</h3><p class="room__desc">${room.description}</p><div class="room__specs"><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-ruler"></use></svg></span><span><span class="spec__label">Size</span><span class="spec__value">${room.size}</span></span></div><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-eye"></use></svg></span><span><span class="spec__label">Views</span><span class="spec__value">${room.views}</span></span></div><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-users"></use></svg></span><span><span class="spec__label">Capacity</span><span class="spec__value">${room.capacity}</span></span></div><div class="spec"><span class="spec__icon"><svg aria-hidden="true"><use href="#i-bed-double"></use></svg></span><span><span class="spec__label">Bedding</span><span class="spec__value">${room.beds}</span></span></div></div><span class="room__details-label">Exclusive Details</span><ul class="room__details">${room.details.map((detail, index) => `<li class="room__detail${index > 2 ? ' is-extra' : ''}"${index > 2 && !showAllDetails ? ' hidden' : ''}>${detail}</li>`).join('')}</ul>${room.details.length > 3 ? `<button class="room__more" id="home_page_room_details_button" type="button" data-room-more>${showAllDetails ? 'Show Less' : `View All (${room.details.length - 3} More Details)`}</button>` : ''}</div><div class="room__actions"><a class="button button--primary" id="home_page_room_booking_button" href="https://www.booking.com/hotel/id/the-sankara-hill-penida.html?selected_room=${encodeURIComponent(room.name)}" target="_blank" rel="noopener noreferrer">Book Securely <svg aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></a></div></div>`;
     $('[data-room-more]', roomDisplay)?.addEventListener('click', () => { showAllDetails = !showAllDetails; renderRoom(); });
   };
   $$('[data-room-tab]').forEach((tab) => tab.addEventListener('click', () => {
@@ -110,7 +111,7 @@
   const amenitiesRight = $('[data-scroll-right]');
   if (amenitiesTrack) {
     const step = () => {
-      const card = $('.c-amenity', amenitiesTrack);
+      const card = $('.amenity', amenitiesTrack);
       const gap = parseFloat(getComputedStyle(amenitiesTrack).columnGap) || 0;
       return card ? card.offsetWidth + gap : 360;
     };
@@ -139,19 +140,20 @@
   // Toggle in place so the panel's height transition can actually run;
   // re-rendering the list would recreate the node already open.
   const setFaqOpen = (item, open) => {
-    const trigger = $('.c-accordion__trigger', item);
-    const panel = $('.c-accordion__panel', item);
+    const trigger = $('.accordion__trigger', item);
+    const panel = $('.accordion__panel', item);
     trigger?.setAttribute('aria-expanded', String(open));
     panel?.classList.toggle('is-open', open);
   };
+  const faqSlug = (question) => question.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim().split(/\s+/).slice(0, 6).join('_');
   const renderFaqs = () => {
     if (!faqList) return;
-    faqList.innerHTML = faqs.map((faq, index) => ({ faq, index })).filter(({ faq }) => faqFilter === 'All' || faq[0] === faqFilter).map(({ faq, index }) => `<article class="c-accordion__item" id="home_page_faq_item_${index}"><button class="c-accordion__trigger" type="button" aria-expanded="${openFaq === index}" id="home_page_faq_question_${faq[0].toLowerCase().replace(/\s+/g, '_')}_${index}" aria-controls="home_page_faq_answer_${index}" data-faq-index="${index}"><span class="c-accordion__question">${faq[1]}</span><span class="c-accordion__indicator" aria-hidden="true"><svg><use href="#i-plus"></use></svg></span></button><div class="c-accordion__panel${openFaq === index ? ' is-open' : ''}" id="home_page_faq_answer_${index}" aria-labelledby="home_page_faq_question_${faq[0].toLowerCase().replace(/\s+/g, '_')}_${index}"><div class="c-accordion__panel-inner"><p class="c-accordion__answer">${faq[2]}</p></div></div></article>`).join('');
+    faqList.innerHTML = faqs.map((faq, index) => ({ faq, index })).filter(({ faq }) => faqFilter === 'All' || faq[0] === faqFilter).map(({ faq, index }) => { const slug = faqSlug(faq[1]); return `<article class="accordion__item" id="home_page_faq_item_${slug}"><button class="accordion__trigger" type="button" aria-expanded="${openFaq === index}" id="home_page_faq_question_${slug}" aria-controls="home_page_faq_answer_${slug}" data-faq-index="${index}"><span class="accordion__question">${faq[1]}</span><span class="accordion__indicator" aria-hidden="true"><svg><use href="#i-plus"></use></svg></span></button><div class="accordion__panel${openFaq === index ? ' is-open' : ''}" id="home_page_faq_answer_${slug}" aria-labelledby="home_page_faq_question_${slug}"><div class="accordion__panel-inner"><p class="accordion__answer">${faq[2]}</p></div></div></article>`; }).join('');
     $$('[data-faq-index]', faqList).forEach((button) => button.addEventListener('click', () => {
       const index = Number(button.dataset.faqIndex);
-      const item = button.closest('.c-accordion__item');
+      const item = button.closest('.accordion__item');
       const wasOpen = openFaq === index;
-      $$('.c-accordion__item', faqList).forEach((other) => setFaqOpen(other, false));
+      $$('.accordion__item', faqList).forEach((other) => setFaqOpen(other, false));
       openFaq = wasOpen ? -1 : index;
       if (!wasOpen && item) setFaqOpen(item, true);
     }));

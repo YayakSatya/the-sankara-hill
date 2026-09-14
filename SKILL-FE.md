@@ -1,11 +1,11 @@
 ---
-name: tmd-design-to-html
+name: tmdr-design-to-html
 description: Convert Figma designs (screenshots or Figma MCP data) into clean, token-based HTML, CSS, and JavaScript following the team's frontend standards. Use this skill whenever a designer or user asks to generate a web page from a design, mockup, Figma file, or screenshot; asks to build or revise a homepage, landing page, section (hero, pricing, footer, etc.), or any other page based on a visual design; or asks to create a new page "in the same style" as previously generated pages — even if they don't explicitly mention HTML or CSS.
 ---
 
 # Design-to-HTML Generation
 
-Convert a Figma design (homepage and subsequent related pages/sections)
+Convert a Figma design (any page or section, and related pages)
 into production-ready HTML, CSS, and JavaScript based on a designer's
 prompt. Output must follow the team's shared design token system
 (`scss-core`), the project folder structure defined below, and the
@@ -13,18 +13,39 @@ frontend quality checklist embedded in these rules.
 
 ## Workflow Overview
 
+0. If the `frontend-design` skill is installed, invoke it first for
+   visual-quality guidance (see Section 0).
 1. Read the design input (Figma MCP preferred; screenshot fallback).
-2. Determine context: first-time generation, or continuation/revision.
-3. **Extract assets** (images, logos, icons) from Figma — never leave
+2. Record the source desktop viewport and target desktop cap for proportional
+   scaling (Section 5).
+3. Determine context: first-time generation, or continuation/revision.
+4. **Extract assets** (images, logos, icons) from Figma — never leave
    broken image paths.
-4. **Check component variants/states** in Figma before implementing any
+5. **Check component variants/states** in Figma before implementing any
    interactive component.
-5. Only ask the designer a question if ambiguity is critical. Otherwise
+6. Only ask the designer a question if ambiguity is critical. Otherwise
    assume and mark assumptions.
-6. Generate files into the shared folder structure (Section 8).
-7. Create or update `components.html` (the living style guide).
-8. Append the Manual QA Checklist — never claim runtime behavior is
+7. Generate files into the shared folder structure (Section 8).
+8. Create or update `components.html` (the living style guide).
+9. Append the Manual QA Checklist — never claim runtime behavior is
    verified.
+
+---
+
+## 0. Frontend Design Quality (Optional)
+
+If the `frontend-design` skill is available in this environment, invoke
+it before generating files and apply its visual guidance (composition,
+typography, spacing, color, responsive polish). If it is not installed,
+skip this step and proceed with this skill's rules as-is — do not treat
+it as a hard dependency.
+
+Conflict order when guidance overlaps:
+
+1. User's explicit request.
+2. Figma design and existing project patterns.
+3. This skill's technical/output rules (tokens, IDs, folder structure, QA).
+4. `frontend-design` visual recommendations.
 
 ---
 
@@ -42,11 +63,13 @@ estimate visually when a screenshot is the only input.
 
 **When estimating from a screenshot:**
 
-- Round measurements to the nearest value in the spacing scale (4px
-  increments: 4, 8, 12, 16, 20, 24, 32, 40...).
-- Mark every estimated value: `/* estimated from screenshot */`
-- Never invent precise pixel values (e.g. `padding: 17px`) — round to
-  the nearest token value.
+- Measure and round in source-design pixels first, using the spacing scale
+  (4px increments: 4, 8, 12, 16, 20, 24, 32, 40...). Then convert the
+  final value to `rem` using the proportional-scaling rules in Section 5.
+- Mark every estimated value and retain its source measurement:
+  `/* 24px; estimated from screenshot */`
+- Never invent precise values (e.g. `padding: 1.0625rem` for an estimated
+  17px) — round to the nearest token value before conversion.
 
 **Read the layout carefully, not just the content.** Before writing any
 section, identify from the design: the exact column structure, element
@@ -121,7 +144,7 @@ full page, or multiple pages. Confirm scope before generating.
   styling, layout, or technology changes.
 - **Uniqueness and semantics**: keep every `id` unique within the
   document; preserve native HTML relationships such as `<label
-  for="...">` when assigning IDs.
+for="...">` when assigning IDs.
 - **Stability**: never rename an existing automation `id`; IDs are a
   testing contract — changing one breaks existing QA automation.
 
@@ -169,6 +192,64 @@ CSS custom properties, defined once in `assets/css/tokens.css`.
   fixed widths wider than the viewport; `max-width: 100%` on media.
 - **Responsive**: mobile-first. Breakpoints: `sm` 480px, `md` 768px,
   `lg` 1024px, `xl` 1280px.
+
+### Proportional Desktop Scaling
+
+Build at the design's **source desktop viewport** (the Figma frame width,
+e.g. `1440px`) and scale the complete design proportionally up to a
+**target desktop cap** (default `1920px`, unless the user specifies another).
+Do not widen only the container: typography, spacing, component dimensions,
+radii, icons, and imagery must retain their original proportions.
+
+- At or below the source width: keep the original 1:1 design scale.
+- Between source and target: scale fluidly with the viewport.
+- At or above the target: stop scaling at `target / source`.
+- Use root font-size scaling and `rem` dimensions. Do not use whole-page
+  `zoom` or `transform: scale()`, which can disrupt fixed positioning,
+  coordinates, and text selection.
+
+For a 1440px source and 1920px target, define in `tokens.css`:
+
+```css
+:root {
+  --scale-root-min: 16px;
+  --scale-root-fluid: 1.111111vw; /* 16 / 1440 * 100 */
+  --scale-root-max: 21.333333px; /* 16 * 1920 / 1440 */
+}
+```
+
+Apply in `base.css`:
+
+```css
+html {
+  font-size: clamp(
+    var(--scale-root-min),
+    var(--scale-root-fluid),
+    var(--scale-root-max)
+  );
+}
+```
+
+Convert every design-derived pixel measurement to `rem` using `px / 16`:
+fonts and line-related dimensions, spacing tokens, component widths/heights,
+min/max sizes, offsets, radii, shadows, icons, illustrations, controls, and
+the container width. Examples: `1240px` becomes `77.5rem`; `40px` becomes
+`2.5rem`; `24px` becomes `1.5rem`.
+
+Keep media-query breakpoints in `px`. Keep intentional 1px hairlines and
+truly pixel-fixed technical values in `px`. Preserve `%`, `fr`, `auto`, and
+unitless line-height where appropriate.
+
+For other viewport sizes, calculate:
+
+- `--scale-root-fluid`: `(16 / source width) * 100vw`
+- `--scale-root-max`: `16 * (target width / source width)` pixels
+
+Do not copy the 1440/1920 constants when the source or target differs.
+For an existing fixed-pixel project, migrate all design-derived dimensions
+in `tokens.css`, `base.css`, `components.css`, and page CSS together; do not
+mix fixed-pixel and scalable versions of the same design system. New pages
+must reuse the project's established scaling tokens.
 
 ### CSS file separation
 
@@ -340,10 +421,12 @@ at the end of every generated output:
       `<page>_<element>_<component>` format; repeated items use stable
       business IDs, not indexes; no pre-existing automation `id` was renamed.
 - [ ] `components.html` includes every required global component.
+- [ ] Source desktop width and target cap are recorded; scaling constants are calculated from them.
+- [ ] Design dimensions use `rem` or scalable tokens; raw `px` is limited to breakpoints, hairlines, and fixed technical values.
+- [ ] No horizontal overflow at source width, target cap, or wider viewports; mobile remains usable.
 
 Runtime behavior and visual QA require browser or human verification; do not
 claim those checks are complete.
-
 
 ---
 
@@ -363,3 +446,5 @@ claim those checks are complete.
    comment.
 9. Never claim runtime behavior is verified — always hand off the
    manual QA checklist.
+10. Scale all design geometry through one `rem`-based root scale derived
+    from the source desktop frame and capped at the target viewport.
