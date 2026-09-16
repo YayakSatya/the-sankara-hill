@@ -1,0 +1,30 @@
+/* 404 (404.html / 404.php) — section shells only. */
+
+/* ---------- Message + actions ---------- */
+.error-notice {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.error-notice__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: var(--measure-md);
+}
+
+.error-notice__actions {
+  justify-content: flex-start;
+}
+
+/* ---------- Quick links ---------- */
+.error-links {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.error-links .section-head__title {
+  max-width: var(--measure-md);
+}

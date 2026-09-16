@@ -1,0 +1,111 @@
+/* Room detail template (room-<slug>.html / single-room.php) — section shells only. */
+
+/* ---------- Overview split ---------- */
+.room-overview {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Panel kicker sits above the room name. */
+.room-overview .card__kicker {
+  margin-bottom: var(--space-3);
+}
+
+/* ---------- Amenities ----------
+   Third child of .detail: on phones it follows the panel so the name, specs
+   and booking actions stay next to the photo; on wide screens it sits under
+   the photo while the sticky panel keeps the actions in view. */
+.room-facts {
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+.room-facts__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3) var(--space-8);
+  margin-bottom: 0;
+}
+
+@media (min-width: 480px) {
+  .room-facts__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .room-overview .detail__gallery {
+    grid-column: 1 / 8;
+    grid-row: 1;
+  }
+
+  .room-overview .detail__panel {
+    grid-column: 8 / -1;
+    grid-row: 1 / 3;
+    align-self: start;
+  }
+
+  .room-overview .room-facts {
+    grid-column: 1 / 8;
+    grid-row: 2;
+    margin-top: calc(var(--space-12) * -1);
+  }
+}
+
+/* ---------- Gallery ---------- */
+.room-gallery {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Three columns: the 2x2 lead takes the left pair, singles stack on the right.
+   The WordPress gallery field can hold any count, so the last tile stretches
+   to close a short final row instead of leaving a hole. */
+@media (min-width: 768px) {
+  .room-gallery .gallery__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .room-gallery .gallery__item:nth-child(3n + 1):last-child {
+    grid-column: 1 / -1;
+  }
+
+  .room-gallery .gallery__item:nth-child(3n + 2):last-child {
+    grid-column: span 2;
+  }
+}
+
+.room-gallery .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* ---------- Other rooms ---------- */
+.other-rooms {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* ---------- Concierge CTA (same shell as accommodation.css) ---------- */
+.rooms-cta {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.rooms-cta__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .rooms-cta__actions {
+    flex-direction: row;
+    flex-shrink: 0;
+    width: auto;
+  }
+}

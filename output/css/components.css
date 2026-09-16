@@ -204,7 +204,7 @@
 
 .button--pill {
   padding: var(--space-2) var(--space-5);
-  min-height: var(--control-min-sm);
+  min-height: var(--control-min);
 }
 
 /* ---------- Header ---------- */
@@ -314,6 +314,8 @@
 }
 
 .header__toggle {
+  min-width: var(--control-min);
+  min-height: var(--control-min);
   padding: var(--space-2);
   color: var(--color-inverse);
   transition: color 0.3s;
@@ -959,6 +961,13 @@
   transition: border-color 0.3s;
 }
 
+/* Marker stays 30px on the map; the hit area grows to 44px around it. */
+.poi::after {
+  content: "";
+  position: absolute;
+  inset: calc((var(--poi-size) - var(--control-min)) / 2);
+}
+
 /* Off-island gateway (Bali mainland), drawn in the sea. */
 .poi--gateway {
   border-style: dashed;
@@ -1293,7 +1302,6 @@
   background: rgb(248 246 242 / 92%);
   border: 1px solid var(--color-line);
   border-radius: 999px;
-  backdrop-filter: blur(4px);
   font-size: var(--text-caption);
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -1506,7 +1514,6 @@
 .tag {
   padding: var(--space-2) var(--space-4);
   background: rgb(248 246 242 / 90%);
-  backdrop-filter: blur(4px);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-sm);
   font-size: var(--text-caption);
@@ -1573,7 +1580,7 @@
 }
 
 .spec__icon {
-  color: var(--color-gold);
+  color: var(--color-soft);
 }
 
 .spec__icon svg {
@@ -1646,6 +1653,10 @@
 .room__detail-icon svg {
   width: var(--icon-sm);
   height: var(--icon-sm);
+}
+
+.room__detail:has(.room__detail-icon)::before {
+  display: none;
 }
 
 .room__detail.is-extra[hidden] {
@@ -2351,8 +2362,9 @@
 }
 
 .footer__list a {
-  display: inline-block;
-  padding-block: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-min);
 }
 
 .footer__list a:hover {
@@ -2545,8 +2557,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: var(--control-min-sm);
-  min-height: var(--control-min-sm);
+  min-width: var(--control-min);
+  min-height: var(--control-min);
   padding: var(--space-1) var(--space-2);
   border-radius: 999px;
   color: rgb(255 255 255 / 70%);
@@ -2745,7 +2757,7 @@
   flex-shrink: 0;
   width: var(--icon-sm);
   height: var(--icon-sm);
-  color: var(--color-gold);
+  color: var(--color-soft);
 }
 
 .card__actions {
@@ -3149,6 +3161,13 @@
   display: none;
 }
 
+/* Parked while a section with its own WhatsApp link is on screen (contact). */
+.whatsapp-float.is-parked {
+  transform: translateY(calc(100% + var(--gutter)));
+  box-shadow: none;
+  pointer-events: none;
+}
+
 .whatsapp-float svg {
   flex-shrink: 0;
   width: var(--icon-lg);
@@ -3223,7 +3242,7 @@
   inset: 0;
   z-index: 10;
   background:
-    linear-gradient(to top, rgb(0 0 0 / 55%), rgb(0 0 0 / 20%) 60%, rgb(0 0 0 / 35%)),
+    linear-gradient(to top, rgb(0 0 0 / 70%), rgb(0 0 0 / 40%) 50%, rgb(0 0 0 / 15%)),
     rgb(0 0 0 / 20%);
 }
 
@@ -3250,7 +3269,7 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-size: var(--text-body-lg);
-  color: rgb(255 255 255 / 85%);
+  color: var(--color-inverse);
 }
 
 /* Article variant: date, category and reading time under the title. */
@@ -3263,13 +3282,37 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
-  color: rgb(255 255 255 / 70%);
+  color: var(--color-inverse);
+}
+
+/* Category link inside the meta row (article hero). */
+.page-hero__meta a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgb(255 255 255 / 50%);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.3s;
+}
+
+.page-hero__meta a:hover {
+  text-decoration-color: currentColor;
 }
 
 /* Short variant (404, thin pages): no photo, ink background. */
 .page-hero--short {
   min-height: clamp(16rem, 32vh, 24rem);
   background: var(--color-ink);
+}
+
+/* Eyebrow for pages with no breadcrumb path (404 status code). */
+.page-hero__kicker {
+  display: block;
+  margin-bottom: var(--space-4);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-gold);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3293,7 +3336,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
-  color: rgb(255 255 255 / 70%);
+  color: var(--color-inverse);
 }
 
 .breadcrumb__item {
@@ -3303,7 +3346,15 @@
 }
 
 .breadcrumb__item a {
+  position: relative;
   transition: color 0.3s;
+}
+
+/* Inline text stays 19px tall; the pseudo-element grows the hit area to 44px. */
+.breadcrumb__item a::after {
+  content: "";
+  position: absolute;
+  inset: calc((var(--control-min) - 100%) / -2) 0;
 }
 
 .breadcrumb__item a:hover {
@@ -3438,6 +3489,7 @@
 
 .prose figure img {
   width: 100%;
+  height: auto;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-sm);
 }
@@ -3924,7 +3976,10 @@
   }
 }
 
+/* Panel column is narrow (5/12): the two actions stack at every width so
+   "Ask about this suite" never wraps to two lines beside Book Now. */
 .detail__panel .room__actions {
+  flex-direction: column;
   margin-top: var(--space-2);
 }
 
@@ -3948,6 +4003,8 @@
 
 .hours__row dt {
   display: flex;
+  flex: 1 1 0;
+  min-width: 0;
   align-items: center;
   gap: var(--space-3);
   font-size: var(--text-body-sm);
@@ -3962,7 +4019,7 @@
 }
 
 .hours__row dd {
-  margin: 0;
+  margin: 0 0 0 auto;
   font-family: var(--font-serif);
   font-size: var(--text-body-sm);
   color: var(--color-muted);
@@ -4026,17 +4083,18 @@
   background: var(--color-line);
 }
 
+/* Serif numeral, no circle: the number is editorial, the hairline does the
+   ordering. Width matches --control-min so the connector stays centred. */
 .steps__number {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: var(--control-min);
   height: var(--control-min);
-  background: var(--color-card);
-  border: 1px solid var(--color-gold);
-  border-radius: 999px;
   font-family: var(--font-serif);
-  font-size: var(--text-body-lg);
+  font-size: var(--text-h3);
+  font-variant-numeric: lining-nums;
+  line-height: 1;
   color: var(--color-gold-text);
 }
 
@@ -4159,6 +4217,18 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
+}
+
+/* Visible placeholder label above a sample menu (R-38); WordPress drops it once
+   the real menu is published. */
+.menu-list__note {
+  max-width: var(--measure-md);
+  margin: 0 0 var(--space-8);
+  padding-left: var(--space-4);
+  border-left: var(--rule-thick) solid var(--color-gold);
+  font-size: var(--text-body-sm);
+  font-style: italic;
   color: var(--color-soft);
 }
 
@@ -4483,6 +4553,7 @@ body:has(.lightbox[open]) {
 /* ---------- Reduced motion for every Phase 3 transition ---------- */
 @media (prefers-reduced-motion: reduce) {
   .breadcrumb__item a,
+  .page-hero__meta a,
   .prose a,
   .form__input,
   .form__textarea,

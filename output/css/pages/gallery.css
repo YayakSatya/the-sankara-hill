@@ -1,0 +1,54 @@
+/* Gallery page — section shells only; components live in components.css.
+   Backgrounds: photos (bg) → cta (surface). */
+
+/* ---------- Photo mosaic + filter ---------- */
+.gallery-page {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.gallery-page .section-head__text {
+  max-width: var(--measure-md);
+}
+
+/* The chip row sits between the head and the grid; the head already carries its own margin. */
+.gallery-page .filter-bar {
+  margin-top: calc(-1 * var(--space-4));
+}
+
+.gallery-page .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* Hash deep links scroll to the grid; keep the scrolled header (about 76px) clear. */
+.gallery-page__grid {
+  scroll-margin-top: var(--space-24);
+}
+
+/* Filtered tiles leave the grid entirely so the dense flow closes the gaps. */
+.gallery-page__grid > [data-filter-item][hidden] {
+  display: none;
+}
+
+/* ---------- Instagram CTA ---------- */
+.gallery-cta {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.gallery-cta__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .gallery-cta__actions {
+    flex-direction: row;
+    flex-shrink: 0;
+    width: auto;
+  }
+}

@@ -12,6 +12,12 @@
   };
   menuToggle?.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
   $$('.mobile-menu__link, .mobile-menu .button').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+  // The menu covers the page like a dialog, so Escape closes it and hands focus back.
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || menuToggle?.getAttribute('aria-expanded') !== 'true') return;
+    setMenu(false);
+    menuToggle.focus();
+  });
   window.addEventListener('scroll', () => header?.classList.toggle('is-scrolled', window.scrollY > 24), { passive: true });
 
   const guestToggle = $('[data-guest-toggle]');
@@ -141,8 +147,11 @@
     };
     const updateArrows = () => {
       const maxLeft = track.scrollWidth - track.clientWidth;
-      if (prev) prev.disabled = track.scrollLeft <= 1;
-      if (next) next.disabled = track.scrollLeft >= maxLeft - 1;
+      // Every card fits: there is nothing to scroll, so the arrows come off
+      // instead of sitting disabled on every desktop width.
+      const overflows = maxLeft > 1;
+      if (prev) { prev.hidden = !overflows; prev.disabled = track.scrollLeft <= 1; }
+      if (next) { next.hidden = !overflows; next.disabled = track.scrollLeft >= maxLeft - 1; }
     };
     prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
     next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
@@ -197,6 +206,56 @@
     });
   });
 
+  // Copy-link button ([data-copy-link="<url>"], article share row): hidden in
+  // the markup, shown only when the clipboard API exists, so without JS the
+  // WhatsApp and Facebook links remain the whole share row. Feedback goes to
+  // the aria-describedby status element.
+  if (navigator.clipboard && window.isSecureContext) {
+    $$('[data-copy-link]').forEach((button) => {
+      button.hidden = false;
+      const status = document.getElementById(button.getAttribute('aria-describedby') || '');
+      let timer;
+      button.addEventListener('click', async () => {
+        const url = button.dataset.copyLink || window.location.href;
+        try {
+          await navigator.clipboard.writeText(url);
+          if (status) status.textContent = 'Link copied';
+        } catch {
+          if (status) status.textContent = 'Copy failed. Select the address bar instead.';
+        }
+        clearTimeout(timer);
+        timer = setTimeout(() => { if (status) status.textContent = ''; }, 3000);
+      });
+    });
+  }
+
+  // Static accordion: [data-accordion] wraps .accordion__item blocks whose
+  // trigger names its panel with aria-controls. One item open at a time per
+  // group (offer terms, FAQ page). The home FAQ keeps its own render path.
+  $$('[data-accordion]').forEach((group) => {
+    const triggers = $$('.accordion__trigger[aria-controls]', group);
+    const setOpen = (trigger, open) => {
+      trigger.setAttribute('aria-expanded', String(open));
+      document.getElementById(trigger.getAttribute('aria-controls') || '')?.classList.toggle('is-open', open);
+    };
+    triggers.forEach((trigger) => trigger.addEventListener('click', () => {
+      const open = trigger.getAttribute('aria-expanded') === 'true';
+      triggers.forEach((other) => setOpen(other, false));
+      if (!open) setOpen(trigger, true);
+    }));
+    // Deep link to one question (faq.html#faq_page_faq_item_pets): open it on
+    // load and whenever the hash changes.
+    const openFromHash = () => {
+      const target = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+      const linked = target && group.contains(target) ? $('.accordion__trigger[aria-controls]', target.closest('.accordion__item') || target) : null;
+      if (!linked) return;
+      triggers.forEach((other) => setOpen(other, false));
+      setOpen(linked, true);
+    };
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+  });
+
   // .form: validation styling only after the first submit attempt (see
   // components.css `.form.is-submitted`). Page scripts (contact.js) own the
   // fetch/submit itself.
@@ -239,9 +298,13 @@
   $$('[data-faq-filter]').forEach((button) => button.addEventListener('click', () => { faqFilter = button.dataset.faqFilter || 'All'; openFaq = -1; $$('[data-faq-filter]').forEach((item) => { const active = item === button; item.classList.toggle('is-active', active); item.setAttribute('aria-pressed', String(active)); }); renderFaqs(); }));
   renderFaqs();
 
-  const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((faq) => ({ '@type': 'Question', name: faq[1], acceptedAnswer: { '@type': 'Answer', text: faq[2] } })) };
-  const schema = document.createElement('script');
-  schema.type = 'application/ld+json';
-  schema.textContent = JSON.stringify(faqSchema);
-  document.head.appendChild(schema);
+  // FAQPage schema only where the rendered FAQ block exists (home); faq.html
+  // ships its own static JSON-LD in the head.
+  if (faqList) {
+    const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((faq) => ({ '@type': 'Question', name: faq[1], acceptedAnswer: { '@type': 'Answer', text: faq[2] } })) };
+    const schema = document.createElement('script');
+    schema.type = 'application/ld+json';
+    schema.textContent = JSON.stringify(faqSchema);
+    document.head.appendChild(schema);
+  }
 })();

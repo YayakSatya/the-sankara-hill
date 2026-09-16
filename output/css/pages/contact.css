@@ -1,0 +1,174 @@
+/* Contact page: section shells only; components live in components.css. */
+
+/* Hero meta carries the three direct channels so the first screen already
+   answers the visit; plain case because an uppercase email reads badly. */
+.contact-hero__meta {
+  gap: 0 var(--space-5);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.contact-hero__meta a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-min);
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgb(255 255 255 / 40%);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.3s;
+}
+
+.contact-hero__meta a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* ---------- Details + inquiry form ---------- */
+.contact {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.contact__grid {
+  align-items: start;
+}
+
+/* Details column: list, then socials; the space below is left open. */
+.contact__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.contact__list {
+  margin-bottom: 0;
+  gap: var(--space-6);
+}
+
+.contact__list .locate__item > span {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.contact__list a {
+  color: var(--color-ink);
+  transition: color 0.3s;
+}
+
+.contact__item-label {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
+}
+
+.contact__item-sub a {
+  color: var(--color-gold-text);
+}
+
+.contact__address {
+  font-style: normal;
+}
+
+/* Form panel: white card, same padding rhythm as .room__panel. */
+.contact__panel {
+  padding: var(--space-8);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 768px) {
+  .contact__panel {
+    padding: var(--space-12);
+  }
+}
+
+.contact__panel-title {
+  font-size: var(--text-h4);
+  color: var(--color-ink);
+}
+
+.contact__panel-text {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-8);
+  font-size: var(--text-body-sm);
+  color: var(--color-muted);
+}
+
+.contact__form .form__actions .form__hint {
+  max-width: var(--measure-sm);
+}
+
+/* ---------- Google Maps ---------- */
+.contact-map {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.contact-map__frame {
+  min-height: var(--media-h-md);
+}
+
+@media (min-width: 768px) {
+  .contact-map__frame {
+    min-height: var(--media-h-lg);
+  }
+}
+
+.contact-map__foot {
+  display: flex;
+  margin-top: var(--space-6);
+}
+
+/* One control only: the map and its fallback already show the address. */
+.contact-map__foot {
+  justify-content: flex-end;
+}
+
+/* ---------- Directions ---------- */
+.directions {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.directions__grid {
+  align-items: start;
+}
+
+.directions__actions {
+  margin-top: var(--space-8);
+}
+
+.directions__distances {
+  min-width: 0;
+  margin-top: var(--space-12);
+}
+
+.directions__subtitle {
+  margin-bottom: var(--space-6);
+  font-size: var(--text-h4);
+  color: var(--color-ink);
+}
+
+@media (min-width: 1024px) {
+  .directions__distances {
+    position: sticky;
+    top: calc(var(--space-24) + var(--space-8));
+    margin-top: 0;
+  }
+}
+
+/* ---------- Booking CTA ---------- */
+.contact-cta {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}

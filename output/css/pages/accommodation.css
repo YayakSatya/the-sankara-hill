@@ -1,0 +1,39 @@
+/* Accommodation listing — section shells only; components live in components.css. */
+
+/* ---------- Room listing ---------- */
+.rooms-list {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.rooms-list .section-head__text {
+  max-width: var(--measure-lg);
+}
+
+/* Category tabs sit under the intro, above the grid. */
+.rooms-list .rooms__tabs {
+  margin-top: var(--space-8);
+}
+
+/* ---------- Concierge CTA (shared with room detail pages) ---------- */
+.rooms-cta {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.rooms-cta__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .rooms-cta__actions {
+    flex-direction: row;
+    flex-shrink: 0;
+    width: auto;
+  }
+}

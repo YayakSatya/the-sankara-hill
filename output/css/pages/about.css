@@ -1,0 +1,170 @@
+/* About page — section shells only; components live in components.css.
+   Backgrounds: story (bg) → info (ink) → names (surface) → facilities (bg)
+   → location (surface) → cta (bg). */
+
+/* ---------- Story ---------- */
+.about-story {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.about-story__grid {
+  align-items: center;
+}
+
+.about-story__figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.about-story__figure img {
+  width: 100%;
+  height: var(--media-h-md);
+  object-fit: cover;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+@media (min-width: 768px) {
+  .about-story__figure img {
+    height: var(--media-h-lg);
+  }
+}
+
+/* .welcome__actions is styled in pages/home.css only; give it its own gap here. */
+.about-story .welcome__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-10);
+}
+
+.about-story__caption {
+  margin-top: var(--space-3);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-sm);
+  color: var(--color-soft);
+}
+
+/* ---------- Philosophy of the names ---------- */
+.about-names {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.about-names__head {
+  text-align: center;
+}
+
+.about-names__head .section-head__text {
+  margin-inline: auto;
+}
+
+/* Anchor targets (#punna, #sukha, #radha, #archapala) keep the fixed header clear. */
+.about-names .chapter {
+  scroll-margin-top: var(--space-16);
+}
+
+/* ---------- Facilities ---------- */
+.about-facilities {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+  scroll-margin-top: var(--space-16);
+}
+
+.about-facilities .section-head__text {
+  max-width: var(--measure-md);
+}
+
+.about-facilities__grid {
+  align-items: start;
+}
+
+.about-facilities__subtitle {
+  margin-bottom: var(--space-6);
+  font-size: var(--text-h4);
+  color: var(--color-ink);
+}
+
+/* Venue names that have their own page link out; hover matches the text-link treatment. */
+.about-facilities .hours__row dt a {
+  transition: color 0.3s;
+}
+
+.about-facilities .hours__row dt a:hover {
+  color: var(--color-gold-text);
+}
+
+.about-facilities__services .room__details {
+  margin-bottom: 0;
+}
+
+.about-facilities__actions {
+  margin-top: var(--space-8);
+}
+
+/* ---------- Location & distances ---------- */
+.about-location {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+  scroll-margin-top: var(--space-16);
+}
+
+.about-location__grid {
+  align-items: start;
+}
+
+.about-location__body .section-head {
+  margin-bottom: var(--space-8);
+}
+
+.about-location__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.about-location__map {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .about-location__map {
+    position: sticky;
+    top: calc(var(--space-24) + var(--space-8));
+  }
+}
+
+/* ---------- Plan-your-stay CTA ---------- */
+.about-cta {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.about-cta__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .about-cta__actions {
+    flex-direction: row;
+    flex-shrink: 0;
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-facilities .hours__row dt a {
+    transition: none;
+  }
+}

@@ -1,0 +1,107 @@
+/* Offers listing (offers.html / archive-offer.php) and offer detail (offer-<slug>.html / single-offer.php) — section shells only. */
+
+/* ---------- Listing: active offers ---------- */
+.offers-list {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.offers-list .section-head__text {
+  max-width: var(--measure-md);
+}
+
+.offers-list .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* ---------- Listing: how to book ---------- */
+.offers-redeem {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+  scroll-margin-top: var(--space-16);
+}
+
+.offers-redeem__grid {
+  align-items: start;
+}
+
+.offers-redeem__grid .section-head {
+  margin-bottom: 0;
+}
+
+.offers-redeem__steps {
+  max-width: var(--measure-md);
+}
+
+/* ---------- Detail: overview split ---------- */
+.offer-overview {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.offer-overview .card__kicker {
+  margin-bottom: var(--space-3);
+}
+
+.offer-overview__meta {
+  margin-top: var(--space-4);
+}
+
+/* Panel copy keeps the panel's rhythm rather than the long-form prose measure. */
+.offer-overview__prose {
+  max-width: none;
+}
+
+.offer-overview__prose p {
+  font-size: var(--text-body-sm);
+  line-height: var(--line-loose);
+  color: var(--color-muted);
+}
+
+/* ---------- Detail: terms ---------- */
+.offer-terms {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+  scroll-margin-top: var(--space-16);
+}
+
+.offer-terms__grid {
+  align-items: start;
+}
+
+.offer-terms__grid .section-head {
+  margin-bottom: 0;
+}
+
+/* ---------- Detail: other offers ---------- */
+.other-offers {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* ---------- Tailored-stay CTA (listing and detail) ---------- */
+.offers-cta {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.offers-cta__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .offers-cta__actions {
+    flex-direction: row;
+    flex-shrink: 0;
+    width: auto;
+  }
+}

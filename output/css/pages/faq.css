@@ -1,0 +1,129 @@
+/* FAQ page — section shells only; components live in components.css.
+   Backgrounds: questions (bg) → cta (surface). */
+
+/* ---------- Questions + concierge aside ---------- */
+.faq-page {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.faq-page__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-16);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .faq-page__layout {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: var(--space-20);
+  }
+}
+
+.faq-page__main {
+  min-width: 0;
+}
+
+.faq-page__groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.faq-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  scroll-margin-top: var(--space-24);
+}
+
+.faq-group__head {
+  margin-bottom: var(--space-3);
+}
+
+.faq-group__title {
+  font-size: var(--text-h4);
+  color: var(--color-ink);
+}
+
+.faq-group__intro {
+  margin-top: var(--space-1);
+  font-size: var(--text-body-sm);
+  color: var(--color-soft);
+}
+
+/* Deep links (#faq_page_faq_item_pets) land under the fixed header. */
+.faq-page .accordion__item {
+  scroll-margin-top: var(--space-24);
+}
+
+.faq-page .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* Aside: the reviews card shell reused as a concierge card; sticky beside the list on desktop. */
+.faq-page__aside {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .faq-page__aside {
+    position: sticky;
+    top: calc(var(--space-24) + var(--space-8));
+  }
+}
+
+.faq-page__concierge {
+  height: auto;
+  gap: var(--space-8);
+}
+
+.faq-page__concierge-title {
+  font-size: var(--text-h3);
+  color: var(--color-ink);
+}
+
+.faq-page__concierge-text {
+  margin-top: var(--space-4);
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  color: var(--color-muted);
+}
+
+.faq-page__concierge-hours {
+  margin-top: var(--space-8);
+}
+
+/* Phone number and email break rather than overflow the narrow card. */
+.faq-page__concierge-hours .hours__row dd {
+  overflow-wrap: anywhere;
+}
+
+.faq-page__concierge-hours .hours__row dd a {
+  transition: color 0.3s;
+}
+
+.faq-page__concierge-hours .hours__row dd a:hover {
+  color: var(--color-gold-text);
+}
+
+.faq-page__concierge-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* ---------- Booking CTA ---------- */
+.faq-cta {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-page__concierge-hours .hours__row dd a {
+    transition: none;
+  }
+}

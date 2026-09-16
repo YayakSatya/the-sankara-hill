@@ -21,7 +21,7 @@
   --color-surface: #f5f2ea;
   --color-ink: #2d2d2a;
   --color-muted: #5c5852;
-  --color-soft: #78716c;
+  --color-soft: #6f6863; /* 4.9:1 on --color-surface, 5.0:1 on --color-bg */
   --color-accent: #4b5e50;
   --color-accent-dark: #3d4d41;
   --color-gold: #c5a059;

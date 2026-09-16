@@ -1,0 +1,109 @@
+/* Experiences page — section shells only; components live in components.css. */
+
+/* ---------- Intro + filter + list ---------- */
+.experiences-list {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.experiences-list .section-head__text {
+  max-width: var(--measure-md);
+}
+
+.experiences-list .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* ---------- Detail chapters ---------- */
+.experiences-detail {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.experiences-detail__head {
+  text-align: center;
+}
+
+/* Anchor targets from the cards and the map; keep the fixed header clear of the title. */
+.experience {
+  scroll-margin-top: var(--space-16);
+}
+
+/* Facts list (duration, where, bring) sits between the copy and the button. */
+.experience__facts {
+  margin-top: var(--space-8);
+}
+
+.experience__facts .hours__row dt {
+  flex: 0 0 auto;
+}
+
+.experience__facts .hours__row dd {
+  flex: 1 1 12rem;
+}
+
+.experience .chapter__actions {
+  margin-top: var(--space-8);
+}
+
+/* ---------- Island map + distances ---------- */
+.experiences-map {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.experiences-map__grid {
+  align-items: start;
+}
+
+.experiences-map__body .section-head {
+  margin-bottom: var(--space-8);
+}
+
+.experiences-map__actions {
+  margin-top: var(--space-8);
+}
+
+.experiences-map__map {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .experiences-map__map {
+    position: sticky;
+    top: calc(var(--space-24) + var(--space-8));
+  }
+}
+
+/* ---------- Archapala Wedding Chapel ---------- */
+.experiences-chapel {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+  scroll-margin-top: var(--space-16);
+}
+
+/* ---------- Concierge CTA ---------- */
+.experiences-cta {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.experiences-cta__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .experiences-cta__actions {
+    flex-direction: row;
+    flex-shrink: 0;
+    width: auto;
+  }
+}

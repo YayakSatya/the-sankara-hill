@@ -1,0 +1,119 @@
+/* Dining page — section shells only; components live in components.css. */
+
+/* ---------- Puṇṇa overview ---------- */
+.dining-intro {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* ---------- A day at Puṇṇa (three services, text only) ---------- */
+.dining-day {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.dining-day__list {
+  display: grid;
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dining-day__item {
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+.dining-day__title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-h4);
+  font-weight: 300;
+  line-height: var(--line-tight);
+}
+
+.dining-day__text {
+  margin: 0;
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  color: var(--color-muted);
+}
+
+@media (min-width: 768px) {
+  /* Three columns off one hairline, unlike the photo cards elsewhere on the page. */
+  .dining-day__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-12);
+  }
+}
+
+/* ---------- Menu ---------- */
+.dining-menu {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+  scroll-margin-top: var(--space-16);
+}
+
+.dining-menu__list {
+  margin-top: var(--space-4);
+}
+
+.dining-menu .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* ---------- Sukha Pool & Sunset Deck ---------- */
+.dining-deck {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+  scroll-margin-top: var(--space-16);
+}
+
+/* ---------- Gallery ---------- */
+.dining-gallery {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.dining-gallery .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* ---------- Hours + reservation ---------- */
+.dining-hours {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.dining-hours__grid {
+  align-items: start;
+}
+
+.dining-hours__grid .section-head {
+  margin-bottom: 0;
+}
+
+.dining-hours__cta {
+  margin-top: var(--space-16);
+}
+
+.dining-hours__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .dining-hours__actions {
+    flex-direction: row;
+    flex-shrink: 0;
+    width: auto;
+  }
+}

@@ -1,0 +1,73 @@
+/* Testimonials page — section shells only; components live in components.css.
+   Backgrounds: rating (ink, hidden until real data) → stories (bg) → platforms (surface) → cta (bg). */
+
+/* ---------- Rating summary ---------- */
+/* Three real figures only; the 4-column band variant keeps them 1 / 2 / 3 wide. */
+@media (min-width: 1024px) {
+  .testimonials-rating__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- Guest stories ---------- */
+.testimonials-page {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.testimonials-page .section-head__text {
+  max-width: var(--measure-md);
+}
+
+/* .card-grid sets display: grid, which would beat the hidden attribute. */
+.testimonials-page__grid[hidden] {
+  display: none;
+}
+
+/* Testimonial cards were sized for the swipe track; in the grid they fill the cell. */
+.testimonials-page__grid .testimonial {
+  flex: 1 1 auto;
+  height: 100%;
+}
+
+/* ---------- Review platforms ---------- */
+.testimonials-external {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.testimonials-external__grid {
+  align-items: start;
+}
+
+.testimonials-external .section-head {
+  margin-bottom: 0;
+}
+
+.testimonials-external .card__link {
+  margin-top: var(--space-4);
+}
+
+/* ---------- Booking CTA ---------- */
+.testimonials-cta {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.testimonials-cta__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .testimonials-cta__actions {
+    flex-direction: row;
+    flex-shrink: 0;
+    width: auto;
+  }
+}
