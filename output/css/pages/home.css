@@ -27,8 +27,15 @@
     grid-template-columns: repeat(12, 1fr);
   }
 
+  /* Wide enough for the five category chips to sit on one line. */
   .faq__column {
-    grid-column: 3 / span 8;
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1280px) {
+  .faq__column {
+    grid-column: 2 / span 10;
   }
 }
 
@@ -99,4 +106,24 @@
   flex-wrap: wrap;
   gap: var(--space-3);
   margin-top: var(--space-8);
+}
+
+/* ============================================================================
+   Facilities (index.html #amenities)
+   ========================================================================= */
+/* Cards whose photo is still pending in the content doc: flat surface with the
+   facility icon, labelled so it never reads as a broken image. */
+.amenity__media--pending {
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.amenity__pending {
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
 }

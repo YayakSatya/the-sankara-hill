@@ -434,6 +434,13 @@
   transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
 }
 
+/* Cards inside the horizontal track fade in without the vertical offset: the
+   translate would extend the track's scrollable height by 24px until the last
+   card is revealed. */
+.amenities__track > [data-reveal] {
+  transform: none;
+}
+
 /* Staggered reveal within a group: delay scales with sibling position. */
 .info__grid > [data-reveal]:nth-child(1) { transition-delay: 0ms; }
 .info__grid > [data-reveal]:nth-child(2) { transition-delay: 80ms; }
@@ -446,6 +453,7 @@
 .amenities__track > [data-reveal]:nth-child(2) { transition-delay: 100ms; }
 .amenities__track > [data-reveal]:nth-child(3) { transition-delay: 200ms; }
 .amenities__track > [data-reveal]:nth-child(4) { transition-delay: 300ms; }
+.amenities__track > [data-reveal]:nth-child(5) { transition-delay: 400ms; }
 
 [data-reveal].is-inview {
   opacity: 1;
@@ -1827,6 +1835,10 @@
      inset keeps the first card aligned with the section heading. */
   padding: var(--space-2) var(--amenities-inset) var(--space-4);
   overflow-x: auto;
+  /* overflow-x: auto alone makes overflow-y compute to auto as well, and the
+     24px [data-reveal] offset on cards not yet in view then makes the track
+     scroll vertically on a trackpad. Clip it. */
+  overflow-y: hidden;
   scroll-snap-type: x proximity;
   scroll-padding-inline: var(--amenities-inset);
   /* Scrollbar hidden; arrows and native swipe handle navigation. */
@@ -2146,6 +2158,12 @@
   line-height: 1.8;
   font-weight: 300;
   color: var(--color-muted);
+}
+
+/* Multi-paragraph answers: only the first <p> carries the divider and top padding. */
+.accordion__answer + .accordion__answer {
+  padding-top: 0;
+  border-top: 0;
 }
 
 /* ---------- Reviews card ---------- */
