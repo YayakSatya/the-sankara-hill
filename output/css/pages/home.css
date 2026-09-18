@@ -130,10 +130,11 @@
 
 
 /* ============================================================================
-   index.html restructure — Hero video, and background modifiers so Welcome,
-   Experiences and Offers still alternate surface/bg without Highlights or
-   Gallery between them (see the shared .welcome/.experiences/.offers rules
-   above, written for home.html's fuller section order).
+   index.html restructure — Hero video, and background modifiers so the page
+   keeps a bg/surface/bg/surface rhythm across Welcome, Accommodation,
+   Dining & Wellness, Facilities, Experiences, Offers and Getting Here.
+   Welcome/Facilities already default right; the rest get a page-only
+   modifier so home.html's own (different) order is untouched.
    ========================================================================= */
 .hero__media video {
   width: 100%;
@@ -142,25 +143,12 @@
   animation: hero-zoom 1.8s ease-out both;
 }
 
-.welcome--alt {
+.rooms--alt {
   background: var(--color-surface);
 }
 
-/* Full-width now that the map column is gone; cap the measure for readability. */
-.welcome--alt .welcome__intro {
-  max-width: var(--measure-md);
-  margin-inline: auto;
-  text-align: center;
-  align-items: center;
-}
-
-.welcome--alt .welcome__title,
-.welcome--alt .welcome__text {
-  text-align: center;
-}
-
-.welcome--alt .welcome__actions {
-  justify-content: center;
+.highlights--alt {
+  background: var(--color-bg);
 }
 
 .experiences--alt {
@@ -200,69 +188,5 @@
   display: flex;
   justify-content: flex-end;
   margin-top: var(--space-6);
-}
-
-/* ---------- Card, minimal (index.html experiences + offers) ----------
-   Clean read: no card background/border, big image, description below. */
-.card--minimal {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-}
-
-.card--minimal:hover,
-.card--minimal:focus-within {
-  border-color: transparent;
-}
-
-.card--minimal .card__media {
-  height: var(--media-h-md);
-  border-radius: var(--radius-sm);
-}
-
-.card--minimal .card__body {
-  padding: var(--space-6) 0 0;
-}
-
-/* ---------- Amenity, minimal (index.html facilities slider) ----------
-   Same clean read as .card--minimal: no box, bigger image. The icon badge
-   is dropped from photographed cards (image speaks for itself) but kept on
-   the photo-pending placeholders, where it's the only content standing in
-   for the missing photo. */
-.amenity--minimal {
-  background: transparent;
-  border: none;
-}
-
-.amenity--minimal:hover {
-  border-color: transparent;
-}
-
-.amenity--minimal .amenity__media {
-  height: var(--media-h-md);
-  border-radius: var(--radius-sm);
-}
-
-/* Without the card border, the no-photo placeholder needs its own frame or
-   it blends into the section background (same surface colour). */
-.amenity--minimal .amenity__media--pending {
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-sm);
-}
-
-.amenity--minimal .amenity__body {
-  padding: var(--space-5) 0 0;
-}
-
-@media (min-width: 768px) {
-  .amenity--minimal {
-    flex-basis: calc((100% - var(--space-5)) / 2);
-  }
-}
-
-/* Arrows recentre on the taller image used by the minimal cards. */
-#home_page_amenities_previous_button,
-#home_page_amenities_next_button {
-  top: calc(var(--space-2) + var(--media-h-md) / 2);
 }
 

@@ -323,7 +323,7 @@
       </div>
     </section>
 
-    <section class="amenities" id="facilities">
+    <section class="amenities amenities--minimal" id="facilities">
       <div class="amenities__container">
         <div class="amenities__head" data-reveal>
           <div class="section-head">
@@ -341,11 +341,9 @@
           <button class="amenities__arrow amenities__arrow--right" id="home_page_amenities_next_button" type="button" aria-label="Next facility" aria-controls="home_page_amenities_track" data-scroll-right><svg aria-hidden="true"><use href="#i-chevron-right"></use></svg></button>
           <div class="amenities__track" id="home_page_amenities_track" data-amenities-track>
             <!-- TODO(content): Infinity Pool copy in TSH_Website_Contentwriting.md duplicates the Meeting Room paragraph; the description below is held over from the previous build until real copy lands. -->
-            <article class="amenity" data-reveal>
+            <article class="amenity amenity--minimal" data-reveal>
               <div class="amenity__media">
                 <img loading="lazy" decoding="async" width="1280" height="744" src="images/Pool.jpeg" alt="Infinity pool overlooking the ocean horizon">
-                <span class="amenity__scrim"></span>
-                <span class="amenity__icon"><svg aria-hidden="true"><use href="#i-waves"></use></svg></span>
               </div>
               <div class="amenity__body">
                 <span class="amenity__label">01 · Pool</span>
@@ -357,7 +355,7 @@
               </div>
             </article>
             <!-- TODO(content): Gym photo pending ("Link Photo: [link]"); no fitness-centre image in the asset set. -->
-            <article class="amenity" data-reveal>
+            <article class="amenity amenity--minimal" data-reveal>
               <div class="amenity__media amenity__media--pending" aria-hidden="true">
                 <span class="amenity__icon"><svg aria-hidden="true"><use href="#i-dumbbell"></use></svg></span>
                 <span class="amenity__pending">Photo to follow</span>
@@ -369,7 +367,7 @@
               </div>
             </article>
             <!-- TODO(content): Meeting Room photo pending ("Link Photo: [link]"); no meeting-room image in the asset set. -->
-            <article class="amenity" data-reveal>
+            <article class="amenity amenity--minimal" data-reveal>
               <div class="amenity__media amenity__media--pending" aria-hidden="true">
                 <span class="amenity__icon"><svg aria-hidden="true"><use href="#i-presentation"></use></svg></span>
                 <span class="amenity__pending">Photo to follow</span>
@@ -381,11 +379,9 @@
               </div>
             </article>
             <!-- assumption: no rooftop photo in asset set; resort exterior reused until the rooftop photo link is supplied -->
-            <article class="amenity" data-reveal>
+            <article class="amenity amenity--minimal" data-reveal>
               <div class="amenity__media">
                 <img loading="lazy" decoding="async" width="1280" height="853" src="images/hero_resort_1783043259997.jpeg" alt="Rooftop view across the Nusa Penida landscape at dusk">
-                <span class="amenity__scrim"></span>
-                <span class="amenity__icon"><svg aria-hidden="true"><use href="#i-sunset"></use></svg></span>
               </div>
               <div class="amenity__body">
                 <span class="amenity__label">04 · Rooftop</span>
@@ -394,11 +390,9 @@
               </div>
             </article>
             <!-- assumption: no chapel photo in asset set; the conical pavilion image is the closest stand-in until the Archapala photo link is supplied -->
-            <article class="amenity" data-reveal>
+            <article class="amenity amenity--minimal" data-reveal>
               <div class="amenity__media">
                 <img loading="lazy" decoding="async" width="1280" height="1152" src="images/Lobby.jpeg" alt="Archapala Wedding Chapel perched above Nusa Penida at sunset">
-                <span class="amenity__scrim"></span>
-                <span class="amenity__icon"><svg aria-hidden="true"><use href="#i-church"></use></svg></span>
               </div>
               <div class="amenity__body">
                 <span class="amenity__label">05 · Weddings</span>
@@ -434,41 +428,31 @@
           </div>
         </div>
         <div class="card-grid card-grid--2" id="home_page_offer_list">
-          <article class="card" id="home_page_offer_card_package_one" data-reveal>
+          <article class="card card--minimal" id="home_page_offer_card_package_one" data-reveal>
             <div class="card__media">
               <img loading="lazy" decoding="async" width="1280" height="853" src="images/Villa.jpeg" alt="Pool villa exterior at The Sankara Hill Penida">
-              <div class="card__badges"><span class="tag">Stay Package</span></div>
             </div>
             <div class="card__body">
-              <span class="card__kicker">Package 01</span>
+              <span class="card__kicker">Package 01 · Stay Package</span>
               <h3 class="card__title"><a id="home_page_offer_detail_link_package_one" href="offer-package-one.html">Packages Name 1</a></h3>
               <p class="card__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fringilla eu ex a pharetra. Nulla at dictum urna.</p>
-              <div class="card__meta">
-                <span><svg aria-hidden="true"><use href="#i-calendar-days"></use></svg> Valid until —</span>
-                <span><svg aria-hidden="true"><use href="#i-tag"></use></svg> Inclusions —</span>
-              </div>
-              <div class="card__actions">
-                <a class="button button--outline" href="offer-package-one.html">View Offer</a>
-                <a class="button button--primary" id="home_page_offer_booking_button_package_one" href="https://www.staah.com/" target="_blank" rel="noopener noreferrer" data-booking-cta>Book Now</a>
+              <div class="card__links">
+                <a class="card__link" href="offer-package-one.html">View Offer <svg aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+                <a class="card__link" id="home_page_offer_booking_button_package_one" href="https://www.staah.com/" target="_blank" rel="noopener noreferrer" data-booking-cta>Book Now <svg aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></a>
               </div>
             </div>
           </article>
-          <article class="card" id="home_page_offer_card_package_two" data-reveal>
+          <article class="card card--minimal" id="home_page_offer_card_package_two" data-reveal>
             <div class="card__media">
               <img loading="lazy" decoding="async" width="1376" height="768" src="images/dining_sunset_1783043321272.jpg" alt="Sunset dining terrace at Puñña Restaurant">
-              <div class="card__badges"><span class="tag">Dining Package</span></div>
             </div>
             <div class="card__body">
-              <span class="card__kicker">Package 02</span>
+              <span class="card__kicker">Package 02 · Dining Package</span>
               <h3 class="card__title"><a id="home_page_offer_detail_link_package_two" href="offer-package-two.html">Packages Name 2</a></h3>
               <p class="card__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fringilla eu ex a pharetra. Nulla at dictum urna.</p>
-              <div class="card__meta">
-                <span><svg aria-hidden="true"><use href="#i-calendar-days"></use></svg> Valid until —</span>
-                <span><svg aria-hidden="true"><use href="#i-tag"></use></svg> Inclusions —</span>
-              </div>
-              <div class="card__actions">
-                <a class="button button--outline" href="offer-package-two.html">View Offer</a>
-                <a class="button button--primary" id="home_page_offer_booking_button_package_two" href="https://www.staah.com/" target="_blank" rel="noopener noreferrer" data-booking-cta>Book Now</a>
+              <div class="card__links">
+                <a class="card__link" href="offer-package-two.html">View Offer <svg aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+                <a class="card__link" id="home_page_offer_booking_button_package_two" href="https://www.staah.com/" target="_blank" rel="noopener noreferrer" data-booking-cta>Book Now <svg aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></a>
               </div>
             </div>
           </article>
@@ -498,39 +482,36 @@
         </div>
         <!-- TODO(content): "Activities & Experiences" is lorem ipsum in TSH_Website_Contentwriting.md; the three activities below come from the presentation deck. Photos pending. -->
         <div class="card-grid" id="home_page_experience_list">
-          <article class="card" id="home_page_experience_card_hilltop_yoga" data-reveal>
+          <article class="card card--minimal" id="home_page_experience_card_hilltop_yoga" data-reveal>
             <div class="card__media">
               <img loading="lazy" decoding="async" width="1280" height="853" src="images/sankara-deluxe-hill.jpg" alt="Hilltop yoga pavilion with ocean view">
             </div>
             <div class="card__body">
-              <span class="card__kicker">Wellness · On-site</span>
+              <span class="card__kicker">Wellness · Daily 07.00 – 17.00</span>
               <h3 class="card__title">Hilltop Yoga</h3>
               <p class="card__text">Begin your day with yoga at the open-air pavilion, set against panoramic hill and ocean views, designed for peaceful reflection, balance, and renewal.</p>
-              <div class="card__meta"><span><svg aria-hidden="true"><use href="#i-clock"></use></svg> Daily 07.00 – 17.00</span></div>
               <a class="card__link" id="home_page_experience_detail_link_hilltop_yoga" href="experiences.html#hilltop-yoga">Learn more <svg aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
             </div>
           </article>
-          <article class="card" id="home_page_experience_card_canang_sari" data-reveal>
+          <article class="card card--minimal" id="home_page_experience_card_canang_sari" data-reveal>
             <div class="card__media">
               <img loading="lazy" decoding="async" width="1280" height="853" src="images/Lobby.jpeg" alt="Balinese offering making at the resort lobby">
             </div>
             <div class="card__body">
-              <span class="card__kicker">Culture · On-site</span>
+              <span class="card__kicker">Culture · Daily 07.00 – 22.00</span>
               <h3 class="card__title">Making Balinese Offering (Canang Sari)</h3>
               <p class="card__text">Join a cultural experience inspired by Balinese traditions and learn to craft the daily canang sari offering with our team.</p>
-              <div class="card__meta"><span><svg aria-hidden="true"><use href="#i-clock"></use></svg> Daily 07.00 – 22.00</span></div>
               <a class="card__link" id="home_page_experience_detail_link_canang_sari" href="experiences.html#canang-sari">Learn more <svg aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
             </div>
           </article>
-          <article class="card" id="home_page_experience_card_cooking_class" data-reveal>
+          <article class="card card--minimal" id="home_page_experience_card_cooking_class" data-reveal>
             <div class="card__media">
               <img loading="lazy" decoding="async" width="1376" height="768" src="images/dining_sunset_1783043321272.jpg" alt="Balinese cooking class at Puñña Restaurant">
             </div>
             <div class="card__body">
-              <span class="card__kicker">Culinary · On-site</span>
+              <span class="card__kicker">Culinary · Daily 07.00 – 22.00</span>
               <h3 class="card__title">Balinese Cooking Class</h3>
               <p class="card__text">Cook alongside our chefs using fresh, locally sourced ingredients and take home the flavours of the island.</p>
-              <div class="card__meta"><span><svg aria-hidden="true"><use href="#i-clock"></use></svg> Daily 07.00 – 22.00</span></div>
               <a class="card__link" id="home_page_experience_detail_link_cooking_class" href="experiences.html#cooking-class">Learn more <svg aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
             </div>
           </article>

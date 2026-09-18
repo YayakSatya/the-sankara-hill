@@ -2818,6 +2818,86 @@
   transform: translateX(3px);
 }
 
+/* Pair of text links standing in for a card's button row (e.g. View Offer +
+   Book Now), styled like .card__link but sitting side by side. */
+.card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+
+.card__links .card__link {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* ---------- Card, minimal ----------
+   Clean read for a teaser or listing card: no box/border, bigger image,
+   description below. Used on the home, offers, experiences and spa cards. */
+.card--minimal {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.card--minimal:hover,
+.card--minimal:focus-within {
+  border-color: transparent;
+}
+
+.card--minimal .card__media {
+  height: var(--media-h-md);
+  border-radius: var(--radius-sm);
+}
+
+.card--minimal .card__body {
+  padding: var(--space-6) 0 0;
+}
+
+/* ---------- Amenity, minimal ----------
+   Same clean read as .card--minimal: no box, bigger image. The icon badge
+   is dropped from photographed cards (image speaks for itself) but kept on
+   photo-pending placeholders, where it's the only content standing in for
+   the missing photo. */
+.amenity--minimal {
+  background: transparent;
+  border: none;
+}
+
+.amenity--minimal:hover {
+  border-color: transparent;
+}
+
+.amenity--minimal .amenity__media {
+  height: var(--media-h-md);
+  border-radius: var(--radius-sm);
+}
+
+/* Without the card border, the no-photo placeholder needs its own frame or
+   it blends into the section background (same surface colour). */
+.amenity--minimal .amenity__media--pending {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+.amenity--minimal .amenity__body {
+  padding: var(--space-5) 0 0;
+}
+
+@media (min-width: 768px) {
+  .amenity--minimal {
+    flex-basis: calc((100% - var(--space-5)) / 2);
+  }
+}
+
+/* Arrows recentre on the taller image used by the minimal amenity cards;
+   add this alongside .amenities on the section wrapper. */
+.amenities--minimal .amenities__arrow {
+  top: calc(var(--space-2) + var(--media-h-md) / 2);
+}
+
 /* ---------- Gallery mosaic ---------- */
 .gallery__grid {
   display: grid;
