@@ -127,3 +127,21 @@
   letter-spacing: var(--tracking-caps);
   color: var(--color-soft);
 }
+
+/* ============================================================================
+   About › The Sankara (index.html #story) — the name story from the content
+   doc, laid out with the shared .chapter grid. White band so it reads as its
+   own chapter between welcome (bg) and dining (surface).
+   ========================================================================= */
+.story {
+  padding-block: var(--space-24);
+  background: var(--color-card);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.story__closing {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  color: var(--color-gold-text);
+}

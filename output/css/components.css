@@ -1756,6 +1756,7 @@
 
 @media (min-width: 768px) {
   .amenities__cta {
+    flex-shrink: 0;
     width: auto;
   }
 }
@@ -2358,7 +2359,7 @@
 
 @media (min-width: 1024px) {
   .footer__columns {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
