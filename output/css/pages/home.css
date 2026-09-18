@@ -128,20 +128,141 @@
   color: var(--color-soft);
 }
 
+
 /* ============================================================================
-   About › The Sankara (index.html #story) — the name story from the content
-   doc, laid out with the shared .chapter grid. White band so it reads as its
-   own chapter between welcome (bg) and dining (surface).
+   index.html restructure — Hero video, and background modifiers so Welcome,
+   Experiences and Offers still alternate surface/bg without Highlights or
+   Gallery between them (see the shared .welcome/.experiences/.offers rules
+   above, written for home.html's fuller section order).
    ========================================================================= */
-.story {
+.hero__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: hero-zoom 1.8s ease-out both;
+}
+
+.welcome--alt {
+  background: var(--color-surface);
+}
+
+/* Full-width now that the map column is gone; cap the measure for readability. */
+.welcome--alt .welcome__intro {
+  max-width: var(--measure-md);
+  margin-inline: auto;
+  text-align: center;
+  align-items: center;
+}
+
+.welcome--alt .welcome__title,
+.welcome--alt .welcome__text {
+  text-align: center;
+}
+
+.welcome--alt .welcome__actions {
+  justify-content: center;
+}
+
+.experiences--alt {
+  background: var(--color-bg);
+}
+
+.offers--alt {
+  background: var(--color-surface);
+}
+
+/* ---------- Getting Here (index.html #getting-here) ---------- */
+.getting-here {
   padding-block: var(--space-24);
-  background: var(--color-card);
+  background: var(--color-bg);
   border-bottom: 1px solid var(--color-line);
 }
 
-.story__closing {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: var(--text-body-lg);
-  color: var(--color-gold-text);
+.getting-here__body {
+  max-width: var(--measure-md);
+  margin-inline: auto;
+  text-align: center;
 }
+
+.getting-here__body .section-head__text {
+  text-align: center;
+}
+
+.getting-here__body .welcome__actions {
+  justify-content: center;
+}
+
+.getting-here__map {
+  margin-top: var(--space-12);
+}
+
+.getting-here__map-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-6);
+}
+
+/* ---------- Card, minimal (index.html experiences + offers) ----------
+   Clean read: no card background/border, big image, description below. */
+.card--minimal {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.card--minimal:hover,
+.card--minimal:focus-within {
+  border-color: transparent;
+}
+
+.card--minimal .card__media {
+  height: var(--media-h-md);
+  border-radius: var(--radius-sm);
+}
+
+.card--minimal .card__body {
+  padding: var(--space-6) 0 0;
+}
+
+/* ---------- Amenity, minimal (index.html facilities slider) ----------
+   Same clean read as .card--minimal: no box, bigger image. The icon badge
+   is dropped from photographed cards (image speaks for itself) but kept on
+   the photo-pending placeholders, where it's the only content standing in
+   for the missing photo. */
+.amenity--minimal {
+  background: transparent;
+  border: none;
+}
+
+.amenity--minimal:hover {
+  border-color: transparent;
+}
+
+.amenity--minimal .amenity__media {
+  height: var(--media-h-md);
+  border-radius: var(--radius-sm);
+}
+
+/* Without the card border, the no-photo placeholder needs its own frame or
+   it blends into the section background (same surface colour). */
+.amenity--minimal .amenity__media--pending {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+.amenity--minimal .amenity__body {
+  padding: var(--space-5) 0 0;
+}
+
+@media (min-width: 768px) {
+  .amenity--minimal {
+    flex-basis: calc((100% - var(--space-5)) / 2);
+  }
+}
+
+/* Arrows recentre on the taller image used by the minimal cards. */
+#home_page_amenities_previous_button,
+#home_page_amenities_next_button {
+  top: calc(var(--space-2) + var(--media-h-md) / 2);
+}
+
